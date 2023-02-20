@@ -42,7 +42,32 @@ const resolvers = {
           console.log(err);
           throw new Error("Failed to create an employee.");
         }
-      }
-  }
+    },
+    //allow user to update their own information
+    // allow user to create new account
+    // allow user to delete their own account
+    // allow user to update their own accounteli
+
+    deleteEmployee: async (_, { id }) => {
+        try {
+          await Employee.findByIdAndDelete(id);
+          return true;
+        } catch (err) {
+          console.log(err);
+          throw new Error("Failed to delete an employee.");
+        }
+      },
+    //update employee
+    updateEmployee:  async (_, {id}) =>{
+        try {
+            const employee = await Employee.findById(id);
+            return employee;
+          } catch (err) {
+            console.log(err);
+            throw new Error("Failed to fetch employee.");
+          }
+    },
+}
 };
-module.exports = resolvers;  
+
+module.exports = resolvers;
